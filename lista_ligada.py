@@ -27,6 +27,16 @@ class Lista_Ligada:
             print(no_atual.item, end=" -> ")
             no_atual = no_atual.proximo
         print("null")
+
+    def __str__(self):
+        """ Retorna uma representação em string da lista """
+
+        itens = []
+        no_atual = self.primeiro
+        while no_atual:
+            itens.append(str(no_atual.item))
+            no_atual = no_atual.proximo
+        return " -> ".join(itens) + " -> null"
     
     def pesquisar(self, item):
         """ Retorna True caso o item procurado exista na lista e
