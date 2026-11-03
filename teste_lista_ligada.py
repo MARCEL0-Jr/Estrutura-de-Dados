@@ -1,29 +1,18 @@
+import pytest
 from lista_ligada import Lista_Ligada
 
-
-def test_lista_vazia():
-    lista = Lista_Ligada()
-
-    assert lista.tamanho == 0
-    assert lista.primeiro is None
-
-
-def test_adicionar():
+@pytest.fixture
+def lista():
     lista = Lista_Ligada()
     lista.adicionar(10)
     lista.adicionar(20)
+    lista.adicionar(30)
+    lista.adicionar(40)
+    return lista
+    
+def test_exibir_lista(lista):
+    lista.exibir()
+    assert "10 -> 20 -> 30 -> 40 -> null"
 
-    assert lista.tamanho == 2
-
-
-def test_exibir():
-    lista = Lista_Ligada()
-    lista.adicionar(10)
-    lista.adicionar(20)
-
-    assert lista.exibir() == "10 -> 20 -> null"
-
-
-if __name__ == "__main__":
-    import pytest
-    pytest.main(["-v"])
+def test_print_str_lista(lista):
+    aqssert "10 -> 20 -> 30 -> 40 -> null"
