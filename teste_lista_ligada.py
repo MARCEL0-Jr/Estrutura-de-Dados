@@ -22,5 +22,11 @@ def test_inserir_inicio(lista):
     assert lista.primeiro.item == 5
     assert "7 -> 10 -> 20 -> 30 -> 40 -> null"
 
+def test_inserir_inicio_vazia():
+    lista0 = ListaLigada()
+    lista0.inserir_inicio(7)
+    assert lista0.primeiro.item == 7
+    assert "7 -> null"
+
 if __name__ == "__main__":
     pytest.main(["-v"])
