@@ -23,12 +23,11 @@ class Lista_Ligada:
         """ Retorna os itens da lista como uma string. """
 
         no_atual = self.primeiro
-        texto = ""
         while no_atual:
-            texto += str(no_atual.item) + " -> "
+            print(no_atual.item, end=" -> ")
             no_atual = no_atual.proximo
-        return texto + "null"
-    1
+        print("null")
+    
     def pesquisar(self, item):
         """ Retorna True caso o item procurado exista na lista e
         False, em caso contrário. """
