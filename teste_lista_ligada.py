@@ -19,3 +19,4 @@ def test_print_str_lista(lista):
 
 def test_inserir_inicio(lista):
     lista.inserir_inicio(7)
+    assert "7 -> 10 -> 20 -> 30 -> 40 -> null"
