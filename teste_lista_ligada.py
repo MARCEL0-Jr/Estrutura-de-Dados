@@ -15,4 +15,7 @@ def test_exibir_lista(lista):
     assert "10 -> 20 -> 30 -> 40 -> null"
 
 def test_print_str_lista(lista):
-    aqssert "10 -> 20 -> 30 -> 40 -> null"
+    assert "10 -> 20 -> 30 -> 40 -> null"
+
+def test_inserir_inicio(lista):
+    lista.inserir_inicio(7)
