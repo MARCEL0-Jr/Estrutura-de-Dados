@@ -19,4 +19,8 @@ def test_print_str_lista(lista):
 
 def test_inserir_inicio(lista):
     lista.inserir_inicio(7)
+    assert lista.primeiro.item == 5
     assert "7 -> 10 -> 20 -> 30 -> 40 -> null"
+
+if __name__ == "__main__":
+    pytest.main(["-v"])
