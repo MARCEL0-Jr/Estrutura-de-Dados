@@ -6,6 +6,12 @@ class Lista_Ligada:
         self.primeiro: No = None
         self.tamanho = 0
 
+    def inserir_inicio(self, item):
+        novo_no = No(item)
+        novo_no.proximo = self.primeiro
+        self.primeiro = novo_no
+        self.tamanho += 1
+
     def adicionar(self, item):
         """ Adiciona no fim da lista """
 
