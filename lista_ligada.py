@@ -25,24 +25,16 @@ class Lista_Ligada:
             atual.proximo = novo_no
         self.tamanho += 1
 
-    def exibir(self):
+    def __str__(self):
         """ Retorna os itens da lista como uma string. """
 
         no_atual = self.primeiro
+        string = ""
+        
         while no_atual:
-            print(no_atual.item, end=" -> ")
+            string += no_atual.item + " -> "
             no_atual = no_atual.proximo
-        print("null")
-
-    def __str__(self):
-        """ Retorna uma representação em string da lista """
-
-        itens = []
-        no_atual = self.primeiro
-        while no_atual:
-            itens.append(str(no_atual.item))
-            no_atual = no_atual.proximo
-        return " -> ".join(itens) + " -> null"
+        return string + "null"
     
     def pesquisar(self, item):
         """ Retorna True caso o item procurado exista na lista e
