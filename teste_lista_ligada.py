@@ -1,92 +1,130 @@
+from lista_ligada import ListaLigada
 import pytest
-from lista_ligada import Lista_Ligada
+
 
 @pytest.fixture
 def lista():
-    lista = Lista_Ligada()
-    lista.adicionar(10)
-    lista.adicionar(20)
-    lista.adicionar(30)
-    lista.adicionar(40)
+    lista = ListaLigada()
+    lista.inserir_inicio(10)
+    lista.inserir_inicio(20)
+    lista.inserir_inicio(30)
+    lista.inserir_inicio(40)
     return lista
-    
+
+
 def test_exibir_lista(lista):
-    lista.exibir()
-    assert str(lista) == "10 -> 20 -> 30 -> 40 -> null"
+    assert str(lista) == "40 -> 30 -> 20 -> 10 -> null"
+
 
 def test_inserir_inicio(lista):
-    lista.inserir_inicio(7)
-    assert lista.primeiro.item == 7
-    assert str(lista) == "7 -> 10 -> 20 -> 30 -> 40 -> null"
+    lista.inserir_inicio(1)
+    assert lista.primeiro.item == 1
+    assert str(lista) == "1 -> 40 -> 30 -> 20 -> 10 -> null"
 
-def test_inserir_inicio_vazia():
-    lista0 = ListaLigada()
-    lista0.inserir_inicio(7)
-    assert lista0.primeiro.item == 7
-    assert str(lista0) == "7 -> null"
+
+def test_inserir_inicio_lista_vazia():
+    lista_vazia = ListaLigada()
+    lista_vazia.inserir_inicio(1)
+    assert str(lista_vazia) == "1 -> null"
+
 
 def test_adicionar(lista):
     lista.adicionar(50)
+    assert str(lista) == "40 -> 30 -> 20 -> 10 -> 50 -> null"
 
-    assert str(lista) == "10 -> 20 -> 30 -> 40 -> 50 -> null"
-    assert lista.tamanho == 5
 
 def test_pesquisar(lista):
-    assert lista.pesquisar(20) == True
-    assert lista.pesquisar(40) == True
-    assert lista.pesquisar(50) == False
+    assert lista.pesquisar(20) is True
+    assert lista.pesquisar(100) is False
+
+
+def test_pesquisar_lista_vazia():
+    lista_vazia = ListaLigada()
+    assert lista_vazia.pesquisar(1) is False
+
 
 def test_obter(lista):
-    assert lista.obter(0) == 10
-    assert lista.obter(1) == 20
-    assert lista.obter(2) == 30
-    assert lista.obter(3) == 40
-    assert lista.obter(4) == None
-    assert lista.obter(-1) == None
+    assert lista.obter(0) == 40
+    assert lista.obter(1) == 30
+    assert lista.obter(2) == 20
+    assert lista.obter(3) == 10
+    assert lista.obter(4) is None
+
+
+def test_obter_lista_vazia():
+    lista_vazia = ListaLigada()
+    assert lista_vazia.obter(0) is None
+    assert str(lista_vazia) == "null"
+
 
 def test_inserir(lista):
-    assert lista.inserir(2, 25) == True
-    assert str(lista) == "10 -> 20 -> 25 -> 30 -> 40 -> null"
+    assert lista.inserir(0, 1) is True
+    assert str(lista) == "1 -> 40 -> 30 -> 20 -> 10 -> null"
 
-    assert lista.inserir(0, 5) == True
-    assert str(lista) == "5 -> 10 -> 20 -> 25 -> 30 -> 40 -> null"
 
-    assert lista.inserir(20, 60) == False
+def test_inserir_posicao_invalida(lista):
+    assert lista.inserir(-1, 1) is False
+    assert lista.inserir(5, 1) is False
+    assert str(lista) == "40 -> 30 -> 20 -> 10 -> null"
+
+
+def test_inserir_meio(lista):
+    assert lista.inserir(2, 25) is True
+    assert str(lista) == "40 -> 30 -> 25 -> 20 -> 10 -> null"
+
+
+def test_inserir_fim(lista):
+    assert lista.inserir(4, 5) is True
+    assert str(lista) == "40 -> 30 -> 20 -> 10 -> 5 -> null"
+
 
 def test_remover_inicio(lista):
-    item = lista.remover_inicio()
+    assert lista.remover_inicio() == 40
+    assert str(lista) == "30 -> 20 -> 10 -> null"
 
-    assert item == 10
-    assert str(lista) == "20 -> 30 -> 40 -> null"
-    assert lista.tamanho == 3
 
-def test_remover(lista):
-    assert lista.remover(1) == True
-    assert str(lista) == "10 -> 30 -> 40 -> null"
+def test_remover_inicio_lista_vazia():
+    lista_vazia = ListaLigada()
+    assert lista_vazia.remover_inicio() is None
+    assert str(lista_vazia) == "null"
 
-    assert lista.remover(0) == True
-    assert str(lista) == "30 -> 40 -> null"
 
-    assert lista.remover(10) == False
+def test_remover_posicao(lista):
+    assert lista.remover(2) == 20
+    assert str(lista) == "40 -> 30 -> 10 -> null"
+
+
+def test_remover_posicao_invalida(lista):
+    assert lista.remover(-1) is None
+    assert lista.remover(4) is None
+    assert str(lista) == "40 -> 30 -> 20 -> 10 -> null"
+
+
+def test_remover_fim(lista):
+    assert lista.remover(3) == 10
+    assert str(lista) == "40 -> 30 -> 20 -> null"
+
+
+def test_remover_lista_vazia():
+    lista_vazia = ListaLigada()
+    assert lista_vazia.remover(0) is None
+    assert str(lista_vazia) == "null"
+
 
 def test_remover_item(lista):
-    assert lista.remover_item(20) == True
-    assert str(lista) == "10 -> 30 -> 40 -> null"
+    assert lista.remover_item(30) is True
+    assert str(lista) == "40 -> 20 -> 10 -> null"
 
-    assert lista.remover_item(40) == True
-    assert str(lista) == "10 -> 30 -> null"
 
-    assert lista.remover_item(50) == False
+def test_remover_item_inexistente(lista):
+    assert lista.remover_item(100) is False
+    assert str(lista) == "40 -> 30 -> 20 -> 10 -> null"
 
-def test_lista_vazia():
-    lista0 = Lista_Ligada()
 
-    assert lista0.pesquisar(10) == False
-    assert lista0.obter(0) == None
-    assert lista0.remover_inicio() == None
-    assert lista0.remover(0) == False
-    assert lista0.remover_item(10) == False
-    assert str(lista0) == "null"
+def test_remover_item_lista_vazia():
+    lista_vazia = ListaLigada()
+    assert lista_vazia.remover_item(1) is False
+    assert str(lista_vazia) == "null"
 
 if __name__ == "__main__":
     pytest.main(["-v"])
