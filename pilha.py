@@ -1,20 +1,20 @@
 from lista_ligada import ListaLigada
 class Pilha:
   def __init__(self):
-    self._elemento = Listaligada()
+    self._elementos = Listaligada()
 
-  def getElemento(self):
-    return self._elemento
-  def setElemento(self, elemento):
-    self._elemento = elemento
+  def getElementos(self):
+    return self._elementos
+  def setElementos(self, elementos):
+    self._elementos = elementos
 
   def push(self, item): #Empilhar
-    self._elemento.inserir_inicio(item)
+    self._elementos.inserir_inicio(item)
 
   def pop(self): #Desempilhar
     if self.is_empty():
       return None #Evita Underflow
-    return self._elemento.remover_inicio()
+    return self._elementos.remover_inicio()
 
   def peek(self):#Olhar o topo da lista
     if self.is_empty():
